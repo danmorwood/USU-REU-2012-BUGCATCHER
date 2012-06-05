@@ -1,0 +1,10 @@
+danb91 tested problem Problem3 with input: 1 plus 1 and output: 2 <!@!>danb91 tested problem Problem3 with input: '1 plus 1' and output: '2' <!@!>danb91 tested problem Problem3 with input: 'd' and output: 'd' <!@!>danb91 tested problem Problem3 with input: 'd' and output: 'd' <!@!>danb91 tested problem Problem3 with input: 'd' and output: 'd'
+<!@!>danb91 tested problem Problem3 with input: 'd' and output: 'd'
+<!@!>danb91 tested problem Problem3 with input: '1 plus 1' and output: '2'
+<!@!>danb91 tested problem Problem3 with input: '1 plus 1' and output: '2'
+<!@!>danb91 tested problem Problem3 with input: '1 plus 1' and output: '2'
+<!@!>danb91 tested problem Problem3 with input: '1 plus 1' and output: '4'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Problem3 with input: '1 plus 1' and output: '4'
+<!@!>Bug not found!
+<!@!>

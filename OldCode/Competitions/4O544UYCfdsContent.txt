@@ -1,0 +1,7 @@
+danb91 tested problem Problem1 with input: 'd' and output: 'Hello, d!'
+<!@!>Bug found!
+<!@!>danb91 tested problem Problem3 with input: 'yay' and output: 'yay'
+<!@!>Bug found!
+<!@!>danb91 tested problem Problem3 with input: '4 5' and output: '9'
+<!@!>Bug not found!
+<!@!>

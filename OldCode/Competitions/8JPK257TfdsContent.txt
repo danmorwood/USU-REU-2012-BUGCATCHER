@@ -1,0 +1,40 @@
+danb91 tested problem Problem1 with input: 'john' and output: 'Hello, john!'
+<!@!>Bug found!!
+<!@!>danb91 tested problem Problem1 with input: 'john' and output: 'Hello, john!'
+<!@!>Bug found!!
+<!@!>danb91 tested problem Problem1 with input: 'john' and output: 'Hello, john!'
+<!@!>Bug found!!
+<!@!>danb91 tested problem Problem1 with input: 'john' and output: 'Hello, john!'
+<!@!>danb91 tested problem Problem2 with input: '7 8' and output: '15'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Problem2 with input: '7 9' and output: '16'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Problem2 with input: '4 5' and output: '9'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Problem3 with input: 'yay' and output: 'yay'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Problem3 with input: 'yay' and output: 'yay'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Problem2 with input: '5 6' and output: '4'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Problem2 with input: '3 4' and output: '7'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Problem2 with input: 'j fdj' and output: 'jfdj'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Problem2 with input: '8 8' and output: '16'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Problem3 with input: 'yay' and output: 'yay'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Problem3 with input: 'yay' and output: 'yay'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Problem3 with input: 'yay' and output: 'yay'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Problem3 with input: 'yay' and output: 'yay'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Problem3 with input: 'yay' and output: 'yay'
+<!@!>Bug not found!
+<!@!>danb91 tested problem Problem3 with input: 'yay' and output: 'yay'
+<!@!>Bug found!
+<!@!>danb91 tested problem Problem3 with input: 'yay' and output: 'yay'
+<!@!>Bug not found!
+<!@!>
