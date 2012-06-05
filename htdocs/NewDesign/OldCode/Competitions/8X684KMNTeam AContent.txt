@@ -1,9 +1,0 @@
-Problem 3 
-student: Tested input 2.2 times 2.2 and Expected output 23.4256000000001<!@!>student: Did not find a bug.
-<!@!>Problem 3 
-student: Tested input 2.2 times 2.2 and Expected output 23.42560000000001<!@!>student: Did not find a bug.
-<!@!>Problem 3 
-student: Tested input 2.2 times 2.2 and Expected output 23.4256<!@!>student: Did not find a bug.
-<!@!>Problem 3 
-student: Tested input 2.2 times 2.2 and Expected output 23.4257<!@!>student: Did not find a bug.
-<!@!>

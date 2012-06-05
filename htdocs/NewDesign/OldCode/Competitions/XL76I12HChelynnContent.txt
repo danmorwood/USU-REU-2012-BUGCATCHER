@@ -1,5 +1,0 @@
-chelynn tested problem Problem1 with input: 'Chelynn' and output: 'Hello, Chelynn!'
-<!@!>Bug found!
-<!@!>chelynn tested problem Problem2 with input: '2 3' and output: '5'
-<!@!>Bug found!
-<!@!>

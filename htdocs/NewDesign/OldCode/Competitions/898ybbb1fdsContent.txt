@@ -1,3 +1,0 @@
-danb91 tested problem Calculator with input: '1 plus 1' and output: '2'
-<!@!>danb91 tested problem Calculator with input: '1 plus 1' and output: '2'
-<!@!>
