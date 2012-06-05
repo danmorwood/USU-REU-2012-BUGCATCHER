@@ -1,5 +1,0 @@
-Problem 3 
-danb91: Tested input 1 plus 1 and Expected output 2<!@!>danb91: Did not find a bug.
-<!@!>Problem 3 
-danb91: Tested input '''' and Expected output '''<!@!>danb91: Did not find a bug.
-<!@!>
