@@ -2,6 +2,8 @@
 
 require_once dirname(__FILE__) . '/../Constants/Constants.php';
 require_once dirname(__FILE__) . '/../Database/Connection.php';
+require_once dirname(__FILE__) . '/../Exceptions/BugCatcherExceptions.php';
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -64,7 +66,7 @@ abstract class Model {
     public function __get($field)
     {
         if(!isset($this->types[$field]))
-            throw new Exception($field . ' is not an attribute of this table');
+            throw new BugCatcherException($field . ' is not an attribute of this table');
         
         return $this->values[$field];
     }
@@ -80,11 +82,11 @@ abstract class Model {
         //primary key is immutable
         if($this->types[$field] === 'pk' && isset($this->values[$field]))
         {
-            throw new Exception('Cannot change primary key');
+            throw new BugCatcherException('Cannot change primary key');
         }
         
         if(!isset($this->types[$field]))
-            throw new Exception($field . ' is not an attribute of this table');
+            throw new BugCatcherException($field . ' is not an attribute of this table');
         
         
         
@@ -112,7 +114,7 @@ abstract class Model {
         
         if(!$result = $this->connection->query('SELECT * FROM ' . $this->tableName . ' WHERE ' . $this->uniqueFieldName
                 . '=' . $searchValue))
-               throw new Exception('Query Failed: ' . $this->connection->error);
+               throw new BugCatcherException('Query Failed: ' . $this->connection->error);
         
         //populate the fields
         if(($row = $result->fetch_assoc()))
@@ -122,6 +124,10 @@ abstract class Model {
                 
                 $this->$fieldName = $row[$fieldName];
             }
+        }
+        else
+        {
+            throw new BugCatcherException($this->uniqueFieldName . ' "'. $this->uniqueFieldValue . '" not found');
         }
     }
     
@@ -161,7 +167,7 @@ abstract class Model {
             //field doesn't have a type, something went wrong...
             else
             {
-                throw new Exception('Trying to update a field that doesn\'t exist:' . $fieldName);
+                throw new BugCatcherException('Trying to update a field that doesn\'t exist:' . $fieldName);
             }
             
             $sql .= $value . ",";
@@ -174,7 +180,7 @@ abstract class Model {
         
         
         if(!$this->connection->query($sql))
-            throw new Exception('Update query failed: ' . $this->connection->error);
+            throw new BugCatcherException('Update query failed: ' . $this->connection->error);
     }
     
     
@@ -194,7 +200,7 @@ abstract class Model {
     {
         $fieldType = ''; //temp for holding the type of the field
        if(!$result = $this->connection->query('SHOW COLUMNS FROM ' . $this->tableName))
-               throw new Exception('Query Failed: ' . $this->connection->error);
+               throw new BugCatcherException('Query Failed: ' . $this->connection->error);
        
        while(($row = $result->fetch_assoc()))
        {
@@ -202,7 +208,7 @@ abstract class Model {
            if($row['Field'] === $this->uniqueFieldName && $row['Key'] !== 'UNI' && $row['Key'] !== 'PRI')
            {
                var_dump($row);
-               throw new Exception('Search value must be unique!');
+               throw new BugCatcherException('Search value must be unique!');
            }
            
            //if field is a primary key, save it as such
@@ -231,7 +237,7 @@ abstract class Model {
            //the database contains a type we do not support
            else
            {
-               throw new Exception('Database contains a type we do not support');
+               throw new BugCatcherException('Database contains a type we do not support');
            }
            
            $this->types[$row['Field']] = $fieldType;
@@ -239,6 +245,49 @@ abstract class Model {
            
                 
        }
+    }
+    
+    /**
+     * Adds a row to the database
+     * 
+     * @param string $tablename the name of the table to insert the row into
+     * @param array $data must be a dictionary where the field names are keys and field values are the values.\
+     * if the value is a string, IT MUST BE ENCLOSED IN SINGLE QUOTES
+     */
+    public static function addRow($tablename, array $data)
+    {
+        $sql = 'INSERT INTO ' . $tablename . ' (';
+        
+        //holds the values list
+        $values = 'VALUES (';
+        
+        //construct the insert query
+        foreach($data as $fieldName => $value)
+        {
+          //hash the password
+          if($fieldName === 'password')
+              $value = "'" . crypt ($value, SALT) . "'";
+              
+          $sql .= $fieldName . ',';
+          $values .= $value . ',';
+          
+        }
+        
+        //remove the last commas for both the field names and the values
+        $sql = substr($sql, 0, -1);
+        $values = substr($values, 0, -1);
+        
+        
+        $sql .= ') ';  
+        $values .= ')';
+        
+        $sql .= $values;
+        
+       
+        $con = connectToDB();
+        
+        if(!$con->query($sql))
+           throw new ModelAlreadyExistsException('Error inserting into database: ' . $con->error);
     }
 }
 

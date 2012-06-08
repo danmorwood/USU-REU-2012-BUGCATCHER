@@ -22,6 +22,38 @@ class User extends Model{
         parent::__construct('USERS', $value, $fieldName);
     }
     
+    public static function login($username, $password)
+    {
+        
+        try{
+            $user = new User($username, 'username');
+            
+            if($user->password !== crypt($password, SALT))
+                    return FALSE;
+            
+            return $user;
+        }
+        catch(BugCatcherException $ex)
+        {
+            echo $ex->getMessage();
+            return FALSE;
+            
+        }
+        
+        
+        
+    }
+    
+    public static function registerUser(array $registerData)
+    {
+        
+        foreach($registerData as $fieldName => &$value)
+        {
+            $value = "'" . $value . "'";
+        }
+        
+        Model::addRow('USERS', $registerData);
+    }
     
     
     

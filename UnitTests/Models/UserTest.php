@@ -32,29 +32,36 @@ class UserTest extends PHPUnit_Framework_TestCase {
     public function testFields()
     {
         
-        $this->assertSame('danb', $this->object->username);
-        echo $this->object->password . "\n";
+        
+        $this->assertSame('dansb', $this->object->username);
+        //echo $this->object->password . "\n";
         
     }
     
     public function testCommitToDB()
     {
         
-        
-        $this->object->username = 'danb';
-        
-        $this->object->password = 'tldstok';
-        
-        echo $this->object->password;
-        
-        
-        
-        
        
-        $this->object->commitToDB();
+        $this->object->username = 'dansb';
+        $this->object->password = 'test';
         
-      
+        //var_dump(connectToDB()->query('SELECT * from USERS where username = \'dsio\'')->fetch_assoc());
+        
+        $this->object->commitToDB();  
+       
     }
+    
+    public function testLogin()
+    {
+        $this->assertNotEquals(User::login('dansb', 'test'), FALSE);
+    }
+    
+    public function testRegister()
+    {
+        User::registerUser(array('username' => 'sid', 'password' => 'test', 'fname' => 'sid', 'lname' => 'b'));
+    }
+    
+    
 
 }
 
