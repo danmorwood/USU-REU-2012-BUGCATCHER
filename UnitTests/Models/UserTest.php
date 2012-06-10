@@ -33,7 +33,7 @@ class UserTest extends PHPUnit_Framework_TestCase {
     {
         
         
-        $this->assertSame('dansb', $this->object->username);
+        $this->assertSame('dansbok', $this->object->username);
         //echo $this->object->password . "\n";
         
     }
@@ -42,8 +42,9 @@ class UserTest extends PHPUnit_Framework_TestCase {
     {
         
        
-        $this->object->username = 'dansb';
+        //$this->object->username = 'dansbok';
         $this->object->password = 'test';
+        echo $this->object->password;
         
         //var_dump(connectToDB()->query('SELECT * from USERS where username = \'dsio\'')->fetch_assoc());
         
@@ -53,12 +54,12 @@ class UserTest extends PHPUnit_Framework_TestCase {
     
     public function testLogin()
     {
-        $this->assertNotEquals(User::login('dansb', 'test'), FALSE);
+        $this->assertEquals(User::login('dansb', 'tedst'), FALSE);
     }
     
     public function testRegister()
     {
-        User::registerUser(array('username' => 'sid', 'password' => 'test', 'fname' => 'sid', 'lname' => 'b'));
+        User::registerUser(array('username' => 'mid', 'password' => 'test', 'fname' => 'sid', 'lname' => 'b'));
     }
     
     

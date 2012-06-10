@@ -22,6 +22,14 @@ class User extends Model{
         parent::__construct('USERS', $value, $fieldName);
     }
     
+    
+    
+    /**
+     * If user and password match, this method returns a user, else it returns false
+     * @param type $username username of the user
+     * @param type $password password of the user
+     * @return boolean|\User the user itself if password matches the username (and username exists) , else false
+     */
     public static function login($username, $password)
     {
         
@@ -44,10 +52,12 @@ class User extends Model{
         
     }
     
+    
+    
     public static function registerUser(array $registerData)
     {
         
-        foreach($registerData as $fieldName => &$value)
+        foreach($registerData as &$value)
         {
             $value = "'" . $value . "'";
         }

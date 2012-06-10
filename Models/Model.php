@@ -33,16 +33,22 @@ abstract class Model {
 
     private $uniqueFieldName;
     
+    private $primaryKeyName;
+    
+    private $linkTables; //will hold the link table names
+   
+    
 
 
    
     /**
      * 
-     * @param type $tableName name of the table 
-     * @param type $uniqueValue Unique value to get this user from
-     * @param type $uniqueFieldName Optional, defaults to the primary key if not specified. If specified make sure it is a unique field!
+     * @param string $tableName name of the table 
+     * @param string/int $uniqueValue Unique value to get this user from
+     * @param string $uniqueFieldName Optional, defaults to the primary key if not specified. If specified make sure it is a unique field!
+     * @param array $relationTables Optional, if the model belongs in a link table specify the tables here
      */
-    public function __construct($tableName, $uniqueValue, $uniqueFieldName = FALSE) {
+    public function __construct($tableName, $uniqueValue, $uniqueFieldName = FALSE, array $linkTables = NULL) {
         //connect to the database 
         $this->connection = connectToDB();
         $this->tableName = $tableName;
@@ -50,6 +56,9 @@ abstract class Model {
         
         if($uniqueFieldName)
             $this->uniqueFieldName = $uniqueFieldName;
+        
+        if($linkTables)
+            $this->linkTables = $linkTables;
         
         $this->load();
         
@@ -80,7 +89,7 @@ abstract class Model {
     public function __set($field, $value)
     {
         //primary key is immutable
-        if($this->types[$field] === 'pk' && isset($this->values[$field]))
+        if($this->primaryKeyName === $field && isset($this->values[$field]))
         {
             throw new BugCatcherException('Cannot change primary key');
         }
@@ -178,7 +187,8 @@ abstract class Model {
         //chop off the last comma
         $sql = substr($sql, 0, -1);
         
-        
+        $sql .= ' WHERE ' . $this->primaryKeyName . ' = ' . $this->values[$this->primaryKeyName];
+         
         if(!$this->connection->query($sql))
             throw new BugCatcherException('Update query failed: ' . $this->connection->error);
     }
@@ -191,6 +201,15 @@ abstract class Model {
 
 
     //helper functions
+    
+    
+    private function loadLinks()
+    {
+        foreach($this->linkTables as $linkTableName)
+        {
+            
+        }
+    }
     
     /**
      * Sets up the type mapping betwen the field
@@ -212,15 +231,19 @@ abstract class Model {
            }
            
            //if field is a primary key, save it as such
-           if($row['Key'] === 'PRI' && !isset($this->uniqueFieldName))
+           if($row['Key'] === 'PRI')
            {
+               //if uniqueField is not set, use the name
+               if(!isset($this->uniqueFieldName))
+                   $this->uniqueFieldName = $row['Field'];
                
-               $this->uniqueFieldName = $row['Field'];
-               $fieldType = 'pk';
+               
+               $this->primaryKeyName = $row['Field'];
+               
            }
            
            
-           elseif (strpos($row['Type'], 'text') !== FALSE || strpos($row['Type'], 'char') !== FALSE)
+           if (strpos($row['Type'], 'text') !== FALSE || strpos($row['Type'], 'char') !== FALSE)
            {
                
                $fieldType = 's';
