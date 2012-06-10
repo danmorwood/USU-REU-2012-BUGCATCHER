@@ -11,31 +11,52 @@ require_once dirname(__FILE__) . '/../Exceptions/BugCatcherExceptions.php';
 
 /**
  * Abstract model class which includes methods for loading and updating
- * fields automatically
- * All model classes should subclass from this one
+ * fields automatically.  Since this class is abstract you cannot instiate it.
+ * All model classes should subclass from this one.  
+ * 
+ * I am gonna try to make it so that you shouldn't even have to instantiate Models subclasses directly.
+ * Model subclasses will have static factory methods that will return a fully loaded model object.
+ * ______________________________________________________________________________________________________
+ * 
+ * To access and modify attributes, use the following form: $model->attributeName.
+ * 
+ * Examples: 
+ * - To access the user name of a User:  $username = $user->username; 
+ * - Setting the nickname of an Admin: $admin->nickname = 'nickname';
+ * 
+ * When ever you change the 'password' field of an object, it is automatically hashed.
+ * When changing the password, CHANGE IT USING PLAIN TEXT.
+ * 
+ * Whenever you are finished changing attribute you MUST call $model->commitToDB() to save 
+ * your changes to the database.
+ * 
+ * Relations (like the Teams a User is on) are not implemented yet.
+ * 
+ * 
  *
  * @author danielbokser
  */
 abstract class Model {
     
-    //dictionary that holds field values using the field names as keys
+    /**dictionary that holds field values using the field names as keys*/
     protected $values = array();
-    //dictionary that holds the types of the fields sorted by the field names
+    /**dictionary that holds the types of the fields sorted by the field names*/
     protected $types = array(); 
-    //holds mysql connection
+    /**holds mysql connection*/
     protected $connection;
-    //holds the table name that this model represents
+    /**holds the table name that this model represents*/
     protected $tableName;
     
-    //stores the primary key.  
-    //it is private since subclasses will specify it by its actual field
+    /**stores the primary key.  
+    it is private since subclasses will specify it by its actual field*/
     private $uniqueFieldValue;
 
     private $uniqueFieldName;
     
     private $primaryKeyName;
     
-    private $linkTables; //will hold the link table names
+    /**will hold the link table names*/
+    private $linkTables; 
    
     
 

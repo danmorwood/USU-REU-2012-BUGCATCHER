@@ -7,7 +7,10 @@ require_once 'Model.php';
  */
 
 /**
- * Description of User
+ * Represents a single User (competitor).  You should not have to instatiate the a user directly.
+ * Please use the static methods.
+ * 
+ * Read the Model class description accessing and using fields
  *
  * @author danielbokser
  */
